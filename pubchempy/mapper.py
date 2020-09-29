@@ -1,5 +1,68 @@
 
 
+class CompoundIdType(object):
+    """"""
+    #: Original Deposited Compound
+    DEPOSITED = 0
+    #: Standardized Form of the Deposited Compound
+    STANDARDIZED = 1
+    #: Component of the Standardized Form
+    COMPONENT = 2
+    #: Neutralized Form of the Standardized Form
+    NEUTRALIZED = 3
+    #: Deposited Mixture Component
+    MIXTURE = 4
+    #: Alternate Tautomer Form of the Standardized Form
+    TAUTOMER = 5
+    #: Ionized pKa Form of the Standardized Form
+    IONIZED = 6
+    #: Unspecified or Unknown Compound Type
+    UNKNOWN = 255
+
+
+class BondType(object):
+    SINGLE = 1
+    DOUBLE = 2
+    TRIPLE = 3
+    QUADRUPLE = 4
+    DATIVE = 5
+    COMPLEX = 6
+    IONIC = 7
+    UNKNOWN = 255
+
+
+class CoordinateType(object):
+    TWO_D = 1
+    THREE_D = 2
+    SUBMITTED = 3
+    EXPERIMENTAL = 4
+    COMPUTED = 5
+    STANDARDIZED = 6
+    AUGMENTED = 7
+    ALIGNED = 8
+    COMPACT = 9
+    UNITS_ANGSTROMS = 10
+    UNITS_NANOMETERS = 11
+    UNITS_PIXEL = 12
+    UNITS_POINTS = 13
+    UNITS_STDBONDS = 14
+    UNITS_UNKNOWN = 255
+
+
+class ProjectCategory(object):
+    MLSCN = 1
+    MPLCN = 2
+    MLSCN_AP = 3
+    MPLCN_AP = 4
+    JOURNAL_ARTICLE = 5
+    ASSAY_VENDOR = 6
+    LITERATURE_EXTRACTED = 7
+    LITERATURE_AUTHOR = 8
+    LITERATURE_PUBLISHER = 9
+    RNAIGI = 10
+    OTHER = 255
+
+
 ELEMENTS = {
     1: 'H',
     2: 'He',
