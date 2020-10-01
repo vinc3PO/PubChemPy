@@ -7,11 +7,6 @@ Test identifiers requests.
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import pytest
 
 from pubchempy import *
@@ -36,4 +31,4 @@ def test_no_identifiers():
     assert get_cids('asfgaerghaeirughae', 'name', 'substance') == []
     assert get_cids('asfgaerghaeirughae', 'name', 'compound') == []
     assert get_sids(999999999, 'cid', 'compound') == []
-    assert get_aids(150194, 'cid', 'compound') == []
+    assert get_aids(13513212, 'cid', 'compound') == []

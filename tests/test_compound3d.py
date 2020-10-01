@@ -7,12 +7,10 @@ Test compound object with 3D record.
 
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-
 import pytest
+from pubchempy.functions import text_types
+from pubchempy.errors import PubChemPyDeprecationWarning
+import warnings
 
 from pubchempy import *
 
