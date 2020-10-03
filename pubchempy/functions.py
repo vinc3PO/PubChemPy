@@ -17,11 +17,13 @@ from urllib.error import HTTPError
 from urllib.parse import quote, urlencode
 from urllib.request import urlopen
 from .errors import PubChemHTTPError, NotFoundError
-
+import re
+import logging
 
 
 
 API_BASE = 'https://pubchem.ncbi.nlm.nih.gov/rest/pug'
+API_VIEW = 'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound'
 
 
 
@@ -179,4 +181,45 @@ def _parse_prop(search, proplist):
     props = [i for i in proplist if all(item in i['urn'].items() for item in search.items())]
     if len(props) > 0:
         return props[0]['value'][list(props[0]['value'].keys())[0]]
+
+
+def request_SDS(cid):
+    if not cid:
+        raise ValueError('identifier/cid cannot be None')
+    # Make request
+    try:
+        # log.debug('Request URL: %s', apiurl)
+        # log.debug('Request data: %s', postdata)
+        response = urlopen(API_VIEW + '/{}/JSON?heading=safety+and+hazards'.format(cid))
+        return _parse_sds(json.loads(response.read().decode()))
+    except HTTPError as e:
+        raise PubChemHTTPError(e)
+
+
+def _parse_sds(result):
+    info = result["Record"]["Section"][0]["Section"][0]['Section'][0]['Information']
+    pictogram = []
+    hazard = []
+    precautionary = []
+    for resp in info:
+        if resp['Name'] == 'Pictogram(s)':
+            for picto in resp['Value']['StringWithMarkup'][0]['Markup']:
+                pictObject = {"icon": picto['URL'].split('/')[-1], "string": picto['Extra']}
+                if pictObject not in pictogram:
+                    pictogram.append(pictObject)
+        elif resp['Name'] == 'GHS Hazard Statements':
+            for stat in resp["Value"]['StringWithMarkup']:
+                if stat['String'][0] == "H" and stat['String'][1:4].isnumeric():
+                    if stat['String'][0:4] not in hazard:
+                        hazard.append(stat['String'][0:4])
+                        hazard.sort()
+        elif resp['Name'] == 'Precautionary Statement Codes':
+            for codes in resp["Value"]["StringWithMarkup"]:
+                r1 = re.findall(r"[P0-9+]{3,30}", codes['String'])
+                if r1:
+                    for ps in r1:
+                        if ps not in precautionary:
+                            precautionary.append(ps)
+                            precautionary.sort()
+    return pictogram, hazard, precautionary
 

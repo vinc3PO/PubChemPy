@@ -1,8 +1,8 @@
 import json
-from .functions import get_json, request, _parse_prop
+from .functions import get_json, request, _parse_prop, request_SDS
 from .decorators import deprecated, memoized_property
 from .mapper import ELEMENTS, CoordinateType, BondType
-from .errors import ResponseParseError
+from .errors import ResponseParseError, NotFoundError
 from itertools import zip_longest
 #from . import log
 
@@ -531,6 +531,16 @@ class Compound(object):
         conf = self.record['coords'][0]['conformers'][0]
         if 'data' in conf:
             return _parse_prop({'label': 'Fingerprint', 'name': 'Shape'}, conf['data'])
+
+    @property
+    def safety_data(self):
+        if not hasattr(self, "_safety_data"):
+            try:
+                self._safety_data = request_SDS(self.cid)
+            except NotFoundError:
+                self._safety_data = []
+        return self._safety_data
+
 
 
 
