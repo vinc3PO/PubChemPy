@@ -1,21 +1,7 @@
 PubChemPy
 =========
 
-.. image:: http://img.shields.io/pypi/v/PubChemPy.svg?style=flat
-    :target: https://pypi.python.org/pypi/PubChemPy
-
-.. image:: http://img.shields.io/pypi/l/PubChemPy.svg?style=flat
-    :target: https://github.com/mcs07/PubChemPy/blob/master/LICENSE
-
-.. image:: http://img.shields.io/travis/mcs07/PubChemPy/master.svg?style=flat
-    :target: https://travis-ci.org/mcs07/PubChemPy
-
-.. image:: http://img.shields.io/coveralls/mcs07/PubChemPy/master.svg?style=flat
-    :target: https://coveralls.io/r/mcs07/PubChemPy?branch=master
-
-PubChemPy provides a way to interact with PubChem in Python. It allows chemical searches by name, substructure and
-similarity, chemical standardization, conversion between chemical file formats, depiction and retrieval of chemical
-properties.
+Fork of the glorious pubchempy. The source code was only restructured and safety data capabilities were added. Backward compatibility with the original.
 
 .. code:: python
 
@@ -24,8 +10,10 @@ properties.
     >>> print(comp.isomeric_smiles)
     CCCCCCCNC1CCCC1CCCCCCC(=O)O
     >>> comps = get_compounds('Aspirin', 'name')
-    >>> print(comps[0].xlogp)
-    1.2
+    >>> print(comps[0].safety_data)
+    ([{'icon': 'GHS07.svg', 'string': 'Irritant'}, {'icon': 'GHS08.svg', 'string': 'Health Hazard'}], ['H302', 'H315', 'H316', 'H319', 'H334', 'H335', 'H360', 'H370', 'H371', 'H372', 'H373'], ['P201', 'P202', 'P260', 'P261', 'P264', 'P270', 'P271', 'P280', 'P281', 'P285', 'P301+P312', 'P302+P352', 'P304+P340', 'P304+P341', 'P305+P351+P338', 'P307+P311', 'P308+P313', 'P309+P311', 'P312', 'P314', 'P321', 'P330', 'P332+P313', 'P337+P313', 'P342+P311', 'P362', 'P403+P233', 'P405', 'P501'])
+
+
 
 
 Installation
@@ -35,14 +23,14 @@ Install PubChemPy using:
 
 ::
 
-    pip install pubchempy
-
-Alternatively, try one of the other `installation options`_.
+    git clone https://github.com/vinc3PO/PubChemPy.git
+    cd to/path
+    python pip install .
 
 Documentation
 -------------
 
-Full documentation is available at http://pubchempy.readthedocs.io.
+Full documentation of the original available at http://pubchempy.readthedocs.io.
 
 Contribute
 ----------

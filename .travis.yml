@@ -1,4 +1,4 @@
-language: python
+anguage: python
 sudo: false
 python:
   - "2.7"
