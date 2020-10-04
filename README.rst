@@ -1,7 +1,7 @@
 PubChemPy
 =========
 
-Fork of the glorious pubchempy. The source code was only restructured and safety data capabilities were added. Backward compatibility with the original.
+Fork of the glorious pubchempy. The source code was only restructured and safety data capabilities were added. Backward compatibility with the original. Also removed the python2 checks.
 
 .. code:: python
 
