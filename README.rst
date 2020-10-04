@@ -25,7 +25,7 @@ Install PubChemPy using:
 
     git clone https://github.com/vinc3PO/PubChemPy.git
     cd to/path
-    python pip install .
+    pip install .
 
 Documentation
 -------------
