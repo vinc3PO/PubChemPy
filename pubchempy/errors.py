@@ -1,6 +1,5 @@
 import json
 
-
 class PubChemPyDeprecationWarning(Warning):
     """Warning category for deprecated features."""
     pass
@@ -25,7 +24,6 @@ class PubChemHTTPError(PubChemPyError):
             self.msg += ': %s' % json.loads(e.read().decode())['Fault']['Details'][0]
         except (ValueError, IndexError, KeyError):
             pass
-        print(self.msg)
         if self.code == 400:
             raise BadRequestError(self.msg)
         elif self.code == 404:
