@@ -221,5 +221,5 @@ def _parse_sds(result):
                         if ps not in precautionary:
                             precautionary.append(ps)
                             precautionary.sort()
-    return pictogram, hazard, precautionary
+    return {"pictogram": pictogram, "hazard": hazard,"precautionary": precautionary}
 

@@ -169,3 +169,7 @@ def test_fingerprint(c1):
     assert len(c1.cactvs_fingerprint) == 881
     # Raw fingerprint has 4 byte prefix, 7 bit suffix, and is hex encoded (/4) = 230
     assert len(c1.fingerprint) == (881 + (4 * 8) + 7) / 4
+
+def test_safetydata(c1, c2):
+    assert c2.safety_data == []
+    assert c1.safety_data['pictogram'][0]['icon'] == 'GHS02.svg'

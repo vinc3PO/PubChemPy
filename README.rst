@@ -5,13 +5,16 @@ Fork of the glorious pubchempy. The source code was only restructured and safety
 
 .. code:: python
 
-    >>> from pubchempy import get_compounds, Compound
+    >>> from pubchempy import get_compounds, Compound, get_SDS
     >>> comp = Compound.from_cid(1423)
     >>> print(comp.isomeric_smiles)
     CCCCCCCNC1CCCC1CCCCCCC(=O)O
     >>> comps = get_compounds('Aspirin', 'name')
     >>> print(comps[0].safety_data)
-    ([{'icon': 'GHS07.svg', 'string': 'Irritant'}, {'icon': 'GHS08.svg', 'string': 'Health Hazard'}], ['H302', 'H315', 'H316', 'H319', 'H334', 'H335', 'H360', 'H370', 'H371', 'H372', 'H373'], ['P201', 'P202', 'P260', 'P261', 'P264', 'P270', 'P271', 'P280', 'P281', 'P285', 'P301+P312', 'P302+P352', 'P304+P340', 'P304+P341', 'P305+P351+P338', 'P307+P311', 'P308+P313', 'P309+P311', 'P312', 'P314', 'P321', 'P330', 'P332+P313', 'P337+P313', 'P342+P311', 'P362', 'P403+P233', 'P405', 'P501'])
+    {'pictogram': [{'icon': 'GHS07.svg', 'string': 'Irritant'}, {'icon': 'GHS08.svg', 'string': 'Health Hazard'}], 'hazard': ['H302', 'H315', 'H316', 'H319', 'H334', 'H335', 'H360', 'H370', 'H371', 'H372', 'H373'], 'precautionary': ['P201', 'P202', 'P260', 'P261', 'P264', 'P270', 'P271', 'P280', 'P281', 'P285', 'P301+P312', 'P302+P352', 'P304+P340', 'P304+P341', 'P305+P351+P338', 'P307+P311', 'P308+P313', 'P309+P311', 'P312', 'P314', 'P321', 'P330', 'P332+P313', 'P337+P313', 'P342+P311', 'P362', 'P403+P233', 'P405', 'P501']}
+    >>> print(pcp.request_SDS(cid=1254))
+    {'pictogram': [{'icon': 'GHS07.svg', 'string': 'Irritant'}, {'icon': 'GHS05.svg', 'string': 'Corrosive'}], 'hazard': ['H315', 'H318', 'H319', 'H335', 'H402', 'H412'], 'precautionary': ['P261', 'P264', 'P271', 'P273', 'P280', 'P302+P352', 'P304+P340', 'P305+P351+P338', 'P310', 'P312', 'P321', 'P332+P313', 'P337+P313', 'P362', 'P403+P233', 'P405', 'P501']}
+
 
 
 
