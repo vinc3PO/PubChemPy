@@ -18,7 +18,9 @@ from urllib.parse import quote, urlencode
 from urllib.request import urlopen
 from .errors import PubChemHTTPError, NotFoundError
 import re
-import logging
+from .logger import createLogger
+
+log = createLogger(__name__)
 
 
 
@@ -93,7 +95,7 @@ def get_json(identifier, namespace='cid', domain='compound', operation=None, sea
     try:
         return json.loads(get(identifier, namespace, domain, operation, 'JSON', searchtype, **kwargs).decode())
     except NotFoundError as e:
-        # log.info(e)
+        log.info(e)
         return None
 
 def get_sdf(identifier, namespace='cid', domain='compound',operation=None, searchtype=None, **kwargs):
@@ -101,7 +103,7 @@ def get_sdf(identifier, namespace='cid', domain='compound',operation=None, searc
     try:
         return get(identifier, namespace, domain, operation, 'SDF', searchtype, **kwargs).decode()
     except NotFoundError as e:
-        # log.info(e)
+        log.info(e)
         return None
 
 
@@ -188,11 +190,12 @@ def request_SDS(cid):
         raise ValueError('identifier/cid cannot be None')
     # Make request
     try:
-        # log.debug('Request URL: %s', apiurl)
-        # log.debug('Request data: %s', postdata)
+        log.debug('Request URL: %s', API_VIEW)
+        log.debug('Request data: %s', cid)
         response = urlopen(API_VIEW + '/{}/JSON?heading=safety+and+hazards'.format(cid))
         return _parse_sds(json.loads(response.read().decode()))
     except HTTPError as e:
+        log.info(e)
         raise PubChemHTTPError(e)
 
 
@@ -221,5 +224,5 @@ def _parse_sds(result):
                         if ps not in precautionary:
                             precautionary.append(ps)
                             precautionary.sort()
-    return {"pictogram": pictogram, "hazard": hazard,"precautionary": precautionary}
+    return {"pictogram": pictogram, "hazard": hazard, "precautionary": precautionary}
 

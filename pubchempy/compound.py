@@ -4,7 +4,9 @@ from .decorators import deprecated, memoized_property
 from .mapper import ELEMENTS, CoordinateType, BondType
 from .errors import ResponseParseError, NotFoundError
 from itertools import zip_longest
-#from . import log
+from .logger import createLogger
+
+log = createLogger(__name__)
 
 class Atom(object):
     """Class to represent an atom in a :class:`~pubchempy.Compound`."""

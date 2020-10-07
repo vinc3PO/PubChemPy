@@ -3,6 +3,9 @@ from .functions import get_json, request
 from .mapper import CompoundIdType
 from .decorators import memoized_property
 from .compound import Compound
+from .logger import createLogger
+
+log = createLogger(__name__)
 
 class Substance(object):
     """Corresponds to a single record from the PubChem Substance database.

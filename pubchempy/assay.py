@@ -1,6 +1,8 @@
 import json
 from .functions import request, get_json
+from .logger import createLogger
 
+log = createLogger(__name__)
 
 
 class Assay(object):
